@@ -9,7 +9,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-(add-to-list 'load-path "~/.emacs.d/evil")
+(add-to-list 'load-path "~/.emacs.d/plugins/evil")
 (require 'evil)
 (evil-mode 1)
 
