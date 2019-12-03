@@ -10,9 +10,13 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 (add-to-list 'load-path "~/.emacs.d/plugins/evil")
+;; Saves TAB for org-mode fold cycle
+(setq evil-want-C-i-jump nil)
+
 (require 'evil)
 (evil-mode 1)
 
+(setq org-startup-truncated nil) ;; gives line-wrap
 (package-initialize)
 (setq org-hide-emphasis-markers t)
 (font-lock-add-keywords 'org-mode
@@ -29,6 +33,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-cb" 'org-switchb)
+(setq evil-want-C-i-jump nil)
 
 (let* ((variable-tuple (cond ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
                              ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
@@ -56,3 +61,14 @@
 (evil-org-set-key-theme '(navigation insert textobjects additional calendar))
 (require 'evil-org-agenda)
 (evil-org-agenda-set-keys)
+
+;; custom stuff 
+;; Record a note on what was acciomplished when clocking out of an item.
+(setq org-log-note-clock-out t)
+;; TODO fill out below with files, maybe a glob?
+;; same directory of dropbox would be nice.
+;; (setq org-agenda-files ’("~/Dropbox/todo.org"))
+(setq org-timer-default-timer 20)
+;; Use the timer we set when clocking in happens.
+(add-hook ’org-clock-in-hook
+  (lambda () (org-timer-set-timer ’(16))))
